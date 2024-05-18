@@ -1,0 +1,33 @@
+.form {
+  width: 60%;
+  position: relative;
+}
+
+.input {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 4vh;
+  padding: 0 2rem 0 1rem;
+  font-size: 1.2rem;
+  -moz-appearance: textfield;
+}
+
+.input::-webkit-inner-spin-button,
+.input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.button {
+    position: absolute;
+    right: 0;
+    z-index: 1;
+    height: 4vh;
+    width: 4vh;
+    font-size: 1.5rem;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding-bottom: 0.2rem;
+}
