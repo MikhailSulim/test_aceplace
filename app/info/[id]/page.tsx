@@ -4,6 +4,9 @@ import React, { useEffect } from 'react';
 import useSWR from 'swr';
 import LoadingData from './loading';
 import ErrorMsg from './error';
+import Link from 'next/link';
+import useModalStore from '@/store';
+import Modal from '@/components/Modal/Modal';
 type Props = {
   params: {
     id: string;
@@ -12,6 +15,7 @@ type Props = {
 
 export default function Page({ params: { id } }: Props) {
   const { data, error, isLoading } = useSWR(`/api/info/${id}`, getDataByINN);
+  const { isOpen, openModal, closeModal } = useModalStore();
 
   return (
     <main>
@@ -29,7 +33,9 @@ export default function Page({ params: { id } }: Props) {
           <li>
             Адрес
             <p>
-              <a>{data.suggestions[0].data.address.value}</a>
+              <span onClick={openModal}>
+                {data.suggestions[0].data.address.value}
+              </span>
             </p>
           </li>
           <li>
@@ -40,6 +46,10 @@ export default function Page({ params: { id } }: Props) {
       )}
       {!isLoading && data.suggestions.length === 0 && (
         <span>Организаций с данным ИНН не найдено</span>
+      )}
+      {!isLoading && <Link href={'/'}>Вернуться на главную </Link>}
+      {isOpen && data.suggestions[0].data.address.value &&  (
+        <Modal address={data.suggestions[0].data.address.value} />
       )}
     </main>
   );
