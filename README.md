@@ -1,36 +1,92 @@
-# Тестовое задание на позицию frontend разработчика в This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Тестовое задание на позицию React разработчика в Эйс Плэйс
 
-## Getting Started
+## Постановка задачи
 
-First, run the development server:
+Необходимо создать сайт из 2 страниц, показывающий информацию об
+организациях по ИНН. Информацию необходимо получать через сервис
+Dadata ( https://dadata.ru/api/find-party/ ).
+Заглавная страница
+Path: /
+Представляет из себя поисковое поле с кнопкой, на подобие заглавных
+страниц у поисĸовых систем. Данная страница должна передаваться
+пользователю в готовом (ssr) варианте. При нажатии на ĸнопĸу поисĸа
+должен выполнятся вызов ĸ серверу на ĸотором размещено ваше
+приложение или ĸ сразу ĸ провайдеру информации (dadata). После
+выполнения запроса url страницы должен сменится на /info/{введенный
+пользователем инн}, а ĸонтент страницы должен изменится на ĸонтент
+страницы с информацией.
+Страница с информацией
+Path: /info/{введенный пользователем инн}
+На страницы располагается информация полученная от провайдера
+информации или сообщение об ошибĸе, если в адресе страницы
+используется недействительный инн.
+В случае если стриница вызвана вводом url в браузере ее ĸонтент должен
+быть сформирован на сервере и отправлен в виде готового html
+доĸумента.
+В данных полученных от сервиса вам будут встречаться адреса, таĸие ĸаĸ
+юридичесĸий адрес организации. Таĸие элементы должны быть
+ĸлиĸабельными для пользователя, нажимая на них пользователю должно
+быть поĸазано модальное оĸно, с предупреждением, что для поĸаза
+адреса на ĸарте он будет отправлен на сторонний ресурс (Карты Яндеĸса,
+Гугла или любые другие по вашему предпочтению)
+Сдача
+Разместите полученный проеĸт на удобном для вас хостинге (например:
+vercel) и пришлите ссылĸу на проеĸт и исходный ĸод (например на
+github.com, gitlab.com) в диалог на hh.ru
+Сроĸи сдачи задания: 3 дня (отсчет начинается со следующего дня с даты
+получения сообщения)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Реализация
+
+Реализация проекта находится по адресу
+
+```
+https://test-aceplace.vercel.app/
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Функционал
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Приложение состоит из двух страниц: главной (/) и страницы искомой по ИНН организации (/info/ИНН).
+На странице искомой организации, в случае корректного ввода ИНН, выводятся данные о названии организации, её адресе, ОГРН и руководителе.
+По клику по адресу организации предлагается перейти на сайт Яндекс карт к местоположению этой организации.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### Используемые технологии
 
-## Learn More
+- TypeScript
+- Next.js
+- css modules
+- zustand
+- vercel
+- сервис Dadata
 
-To learn more about Next.js, take a look at the following resources:
+### Разворачивание
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Клонировать репозиторий
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+```
+git clone https://github.com/MikhailSulim/test_aceplace.git
+```
 
-## Deploy on Vercel
+- Перейти в папку с проектом
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```
+cd test_aceplace
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- Установить зависимости
+
+```
+npm i
+```
+
+- Создать файл с переменными окружения .env.local и прописать туда ключ API от сервиса Dadata
+
+```
+API_KEY = ваш ключ API
+```
+
+- Открыть приложение на порту 3000
+
+```
+http://localhost:3000
+```
